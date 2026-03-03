@@ -3,8 +3,8 @@
     $nome1 = $_POST['nome1']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'nome1', sendo o 'nome1' o nome do primeiro conjunto
     $nome2 = $_POST['nome2']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'nome2', sendo o 'nome2' o nome do primeiro conjunto
 
-    $set1 = $_POST['conjunto1']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'conjunto1', sendo o 'conjunto1' os elementos do primeiro conjunto
-    $set2 = $_POST['conjunto2']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'conjunto2', sendo o 'conjunto2' os elementos do segundo conjunto
+    $set1 = $_POST['conjunto1'] ?? 'Ø'; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'conjunto1', sendo o 'conjunto1' os elementos do primeiro conjunto
+    $set2 = $_POST['conjunto2'] ?? 'Ø'; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'conjunto2', sendo o 'conjunto2' os elementos do segundo conjunto
     
     $set1 = explode(",", $set1); # Aqui a função explode() pega a variavel $set1 que foi recebida em string e divide ela em varias partes, se transformando em um array
     $set2 = explode(",", $set2); # Aqui a função explode() pega a variavel $set2 que foi recebida em string e divide ela em varias partes, se transformando em um array
