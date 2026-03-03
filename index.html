@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .linha-form {
+        display: flex;  
+        align-items: center; 
+        margin-bottom: 15px; 
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .linha-form label {
+        width: 220px;
+        text-align: right;
+        margin-right: 15px;
+        font-weight: bold;
+    }
+
+
+    .linha-form input[type="text"] {
+        padding: 8px;
+        width: 300px; 
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <form action="conjunto.php" method="post">
+        <div class="linha-form"><label>Nomeie o primeiro conjunto com uma letra:</label> <input type="text" name="nome1"></div>
+        <div class="linha-form"><label>Elementos do conjunto 1:</label> <input type="text" name="conjunto1"></div>
+        <div class="linha-form"><label>Nomeie o segundo conjunto com uma letra:</label> <input type="text" name="nome2"></div>
+        <div class="linha-form"><label>Elementos do conjunto 2:</label> <input type="text" name="conjunto2"></div>
+        <div class="linha-form"><input type="submit" value="Enviar Formulario"></div>
+    </form>
+</body>
+</html>
