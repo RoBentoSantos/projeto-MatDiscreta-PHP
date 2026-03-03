@@ -1,53 +1,53 @@
 <?php 
 
-    $nome1 = $_POST['nome1'];
-    $nome2 = $_POST['nome2'];
+    $nome1 = $_POST['nome1']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'nome1', sendo o 'nome1' o nome do primeiro conjunto
+    $nome2 = $_POST['nome2']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'nome2', sendo o 'nome2' o nome do primeiro conjunto
 
-    $set1 = $_POST['conjunto1'];
-    $set2 = $_POST['conjunto2'];
+    $set1 = $_POST['conjunto1']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'conjunto1', sendo o 'conjunto1' os elementos do primeiro conjunto
+    $set2 = $_POST['conjunto2']; # Aqui o $_POST captura o valor enviado pelo campo com o nome 'conjunto2', sendo o 'conjunto2' os elementos do segundo conjunto
     
-    $set1 = explode(",", $set1);
-    $set2 = explode(",", $set2);
+    $set1 = explode(",", $set1); # Aqui a função explode() pega a variavel $set1 que foi recebida em string e divide ela em varias partes, se transformando em um array
+    $set2 = explode(",", $set2); # Aqui a função explode() pega a variavel $set2 que foi recebida em string e divide ela em varias partes, se transformando em um array
 
-    $set1 = array_unique($set1);
-    $set2 = array_unique($set2);
-
-
-    $set1 = array_map('trim', $set1);
-    $set2 = array_map('trim', $set2);
-
-    $card1 = count($set1);
-    $card2 = count($set2);
-
-    $set1 = array_map('strtoupper', $set1);
-    $set2 = array_map('strtoupper', $set2);
+    $set1 = array_unique($set1); # Aqui a função de array_unique() tira os elementos repetidos
+    $set2 = array_unique($set2); # Aqui a função de array_unique() tira os elementos repetidos
 
 
-    $setUni = array_merge($set1, $set2);
-    $setUni = array_unique($setUni);
-    $cardUni = count($setUni);
-    sort($setUni);
+    $set1 = array_map('trim', $set1); # Aqui a função array_map() com 'trim', faz com que os elementos não fiquem com espaços em brancos tanto na direita quanto na esquerda, Ex: " A" vira "A"
+    $set2 = array_map('trim', $set2); # Aqui a função array_map() com 'trim', faz com que os elementos não fiquem com espaços em brancos tanto na direita quanto na esquerda, Ex: " A" vira "A"
 
-    $setInter = array_intersect($set1, $set2);
-    $cardInter = count($setInter);
-    sort($setInter);
+    $card1 = count($set1); # Aqui conta o numero de elementos nos conjuntos, sendo essa a cardinalidade do primeiro conjunto
+    $card2 = count($set2); # Aqui conta o numero de elementos nos conjuntos, sendo essa a cardinalidade do segundo conjunto
 
-    $indiceJacc = $cardInter / $cardUni;
+    $set1 = array_map('strtoupper', $set1); # Aqui transforma todos os elementos em maiusculos
+    $set2 = array_map('strtoupper', $set2); # Aqui transforma todos os elementos em maiusculos
 
-    $setDifAB = array_diff($set1, $set2);
 
-    $setDifBA = array_diff($set2, $set1);
+    $setUni = array_merge($set1, $set2); # Aqui junta o primeiro conjunto com o segundo conjunto, sendo essa variavel a uniao
+    $setUni = array_unique($setUni); # Aqui elimina as replicatas após a união ser feita
+    $cardUni = count($setUni); # Aqui pegamos a cardinalidade da união para calcular o indice de Jaccard
+    sort($setUni); # Aqui organiza em ordem descrescente ou numerica
 
-    $setDifSim = array_merge($setDifAB, $setDifBA);
-    sort($setDifSim);
+    $setInter = array_intersect($set1, $set2); # Aqui pega a intersecção do primeiro conjunto e do segundo conjunto
+    $cardInter = count($setInter); # Aqui pega a cardinalidade da intersecção para o calculo de Jaccard
+    sort($setInter); # Aqui organiza em ordem descrescente ou numerica
 
-    $set1 = implode(', ', $set1);
-    $set2 = implode(', ', $set2);
-    $setUni = implode(', ', $setUni);
-    $setInter = implode(', ', $setInter);
-    $setDifAB = implode(', ', $setDifAB);
-    $setDifBA = implode(', ', $setDifBA);
-    $setDifSim = implode(', ', $setDifSim);
+    $indiceJacc = $cardInter / $cardUni; # Aqui é feito o calculo de Jaccard, Cardinalidade da intersecção / Cardinalidade da União
+
+    $setDifAB = array_diff($set1, $set2); # Aqui pegamos a diferença do primeiro conjunto com o segundo (A - B)
+
+    $setDifBA = array_diff($set2, $set1); # Aqui pegamos a diferença do segundo conjunto com o pirmeiro (B - A)
+
+    $setDifSim = array_merge($setDifAB, $setDifBA); # Aqui juntamos as diferenças, sendo essa a diferença simetrica
+    sort($setDifSim); # Aqui organiza em ordem descrescente ou numerica
+
+    $set1 = implode(', ', $set1); # Até aqui estavamos lidando com um array(pense em uma lista), o implode() coloca o ', ' como separador entre os itens do primeiro conjunto
+    $set2 = implode(', ', $set2); # Até aqui estavamos lidando com um array(pense em uma lista), o implode() coloca o ', ' como separador entre os itens do segundo conjunto
+    $setUni = implode(', ', $setUni); # Até aqui estavamos lidando com um array(pense em uma lista), o implode() coloca o ', ' como separador entre os itens da união dos conjuntos
+    $setInter = implode(', ', $setInter); # Até aqui estavamos lidando com um array(pense em uma lista), o implode() coloca o ', ' como separador entre os itens da intersecção dos conjuntos
+    $setDifAB = implode(', ', $setDifAB); # Até aqui estavamos lidando com um array(pense em uma lista), o implode() coloca o ', ' como separador entre os itens de A - B
+    $setDifBA = implode(', ', $setDifBA); # Até aqui estavamos lidando com um array(pense em uma lista), o implode() coloca o ', ' como separador entre os itens de B - A
+    $setDifSim = implode(', ', $setDifSim); # Até aqui estavamos lidando com um array(pense em uma lista), o implode() coloca o ', ' como separador entre os itens da difeença simetrica
     
 
 ?>
@@ -60,26 +60,20 @@
     <title>Resultado do Set</title>
     <style>
     body { font-family: sans-serif; background: #f4f4f9; padding: 20px; }
-    .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
-    h3 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
-    .res { font-weight: bold; color: #2c3e50; font-family: monospace; font-size: 1.2em; }
-    .label { color: #7f8c8d; font-size: 0.9em; }
-    .operacao { margin-bottom: 15px; padding: 10px; border-left: 5px solid #3498db; background: #eaf2f8; }
-    .interseccao { border-left-color: #27ae60; background: #eafaf1; }
-    .diferenca { border-left-color: #e67e22; background: #fef5e7; }
+    p { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 10px; font-weight: bold;}
     </style>
 </head>
 <body>
-    <h3>Conjunto <?php echo $nome1?> = {<?php echo $set1?>} e #<?php echo $nome1?> = <?php echo $card1?></h3>
-    <h3>Conjunto <?php echo $nome2?> = {<?php echo $set2?>} e #<?php echo $nome2?> = <?php echo $card2?></h3>
-    <h3><?php echo $nome1?> ∩ <?php echo $nome2?> = {<?php echo $setInter?>} </h3>
-    <h3><?php echo $nome1?> ∪ <?php echo $nome2?> = {<?php echo $setUni?>}</h3>
-    <h3>#(<?php echo $nome1?> ∩ <?php echo $nome2?>) = <?php echo $cardInter?></h3>
-    <h3>#(<?php echo $nome1?> ∪ <?php echo $nome2?>) = <?php echo $cardUni?></h3>
-    <h3>A Diferença do conjunto <?php echo $nome1?> e <?php echo $nome2?> = {<?php echo $setDifAB?>}</h3>
-    <h3>A Diferença do conjunto <?php echo $nome2?> e <?php echo $nome1?> = {<?php echo $setDifBA?>}</h3>
-    <h3>A Diferença Simetrica do conjunto <?php echo $nome1?> e <?php echo $nome2?> = {<?php echo $setDifSim?>}</h3>
-    <h3>O indice Jaccard: <?php echo "$cardInter / $cardUni = $indiceJacc ou similaridade de " . $indiceJacc * 100 . "%"?></h3>
+    <p>Conjunto <?php echo $nome1?> = {<?php echo $set1?>} e #<?php echo $nome1?> = <?php echo $card1?></p>
+    <p>Conjunto <?php echo $nome2?> = {<?php echo $set2?>} e #<?php echo $nome2?> = <?php echo $card2?></p>
+    <p><?php echo $nome1?> ∩ <?php echo $nome2?> = {<?php echo $setInter?>} </p>
+    <p><?php echo $nome1?> ∪ <?php echo $nome2?> = {<?php echo $setUni?>}</p>
+    <p>#(<?php echo $nome1?> ∩ <?php echo $nome2?>) = <?php echo $cardInter?></p>
+    <p>#(<?php echo $nome1?> ∪ <?php echo $nome2?>) = <?php echo $cardUni?></p>
+    <p>A Diferença do conjunto <?php echo $nome1?> e <?php echo $nome2?> = {<?php echo $setDifAB?>}</p>
+    <p>A Diferença do conjunto <?php echo $nome2?> e <?php echo $nome1?> = {<?php echo $setDifBA?>}</p>
+    <p>A Diferença Simetrica do conjunto <?php echo $nome1?> e <?php echo $nome2?> = {<?php echo $setDifSim?>}</p>
+    <p>O indice Jaccard: <?php echo "$cardInter / $cardUni = $indiceJacc ou similaridade de " . $indiceJacc * 100 . "%"?></p>
     <a href="index.html">Testar Novamente</a>
 </body>
 </html>
